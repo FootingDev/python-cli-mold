@@ -1,0 +1,28 @@
+molds:
+  - name: python-cli-mold
+    label: Python command line mold
+    help: For creating Python command line interfaces
+
+    dirs:
+      - "{{ footing.project_name }}"
+
+    parameters:
+      - label: repo_name
+        name: Repository Name
+        help: The name of the repository and package.
+        type: string
+
+      - label: module_name
+        name: Module Name
+        help: Importable Python module name.
+        type: string
+
+      - label: short_description
+        name: Short Description
+        help: A short description of the project.
+        type: string
+
+      - label: dockerhub_org
+        name: Dockerhub Organization
+        help: The organization in Dockerhub
+        type: string

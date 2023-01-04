@@ -1,0 +1,42 @@
+project:
+  name: {{ footing.repo_name }}
+
+toolkits:
+  - name: _base
+    tools:
+      - python==3.11
+      - make==4.3
+      - pip==22.3.1
+    manager: conda
+
+  - name: default
+    base: _base
+    manager: pip
+    file: pyproject.toml
+
+  - name: prod
+    base: default
+    manager: pip
+    category: prod
+
+artifacts:
+  - name: {{ footing.repo_name }}
+    kind: image
+    toolkit: prod
+    code: {{ footing.module_name }}
+    entry: python3 cli.py
+
+  - name: sphinx-docs
+    kind: sphinx
+    toolkit: default
+    code: docs
+
+registries:
+  - name: dockerhub
+    kind: container
+    path: {{ footing.dockerhub_org }}
+
+  - name: s3-site
+    kind: s3
+    path: {{ footing.repo_name }}.tryfooting.com
+
